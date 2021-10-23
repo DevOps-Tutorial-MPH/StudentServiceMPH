@@ -19,7 +19,9 @@ import javax.persistence.Id;
 public class Student {
     @Id
     @GeneratedValue
+
     private long id;
+
     private String firstname;
     private String lastname;
     private String email;
