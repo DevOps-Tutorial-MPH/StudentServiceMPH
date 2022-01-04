@@ -5,8 +5,8 @@ import com.example.studentservicemph.Repository.StudentRepository;
 import com.example.studentservicemph.Service.StudentService;
 
 
-import com.example.studentservicemph.VO.ResponseTemplateVO;
-import io.github.resilience4j.retry.annotation.Retry;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,11 +32,6 @@ public class StudentController
     public Student saveUser(@RequestBody Student student){
 
         return studentService.saveUser(student);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseTemplateVO getUserWithDepartment(@PathVariable("id") Long studentId){
-        return studentService.getUserWithDepartment(studentId);
     }
     @GetMapping("/")
     public List<Student> getALL(){

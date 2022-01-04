@@ -2,8 +2,7 @@ package com.example.studentservicemph.Service;
 
 import com.example.studentservicemph.Entity.Student;
 import com.example.studentservicemph.Repository.StudentRepository;
-import com.example.studentservicemph.VO.Department;
-import com.example.studentservicemph.VO.ResponseTemplateVO;
+
 
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
@@ -30,24 +29,8 @@ public class StudentService {
     public Student saveUser(Student student) {
         return studentRepository.save(student);
     }
-    @RateLimiter(name = "basicExample")
-    @Retry(name="basic",fallbackMethod = "orderFallback")
-    public ResponseTemplateVO getUserWithDepartment(Long studentId) {
-        ResponseTemplateVO vo = new ResponseTemplateVO();
-        Student student = studentRepository.findById(studentId).get();
-        //System.out.println(student);
-        vo.setStudent(student);
-        Department department =
-                restTemplate.getForObject("http://localhost:9001/department/"
-                                + student.getDepartmentId(),
-                        Department.class);
-        vo.setDepartment(department);
-        return vo;
+    public List<Student> getAll() {
+        return studentRepository.findAll();
     }
 
-    public ResponseTemplateVO orderFallback(RuntimeException e) {
-        System.out.println("service is down!");
-        ResponseTemplateVO vo = new ResponseTemplateVO();
-        return vo;
-    }
 }
