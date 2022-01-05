@@ -20,7 +20,7 @@ public class Student {
     @Id
     @GeneratedValue
     private long id;
-        private String firstname;
+    private String firstname;
     private String lastname;
     private String email;
     private Long departmentId;
